@@ -1,7 +1,8 @@
 fileFormatVersion: 2
-guid: 367a2849a95b040e2ab7533314f868f4
-folderAsset: yes
-timeCreated: 1490995881
+guid: 9dd0e3c9dea104831bc092afe2f6eb5e
+labels:
+- gvh
+timeCreated: 1503959774
 licenseType: Pro
 DefaultImporter:
   userData: 
