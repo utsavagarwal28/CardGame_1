@@ -658,6 +658,58 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1477024842
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1477024843}
+  - component: {fileID: 1477024844}
+  m_Layer: 0
+  m_Name: FirebaseManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1477024843
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1477024842}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1006.44434, y: 448.36993, z: -1.9185804}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1477024844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1477024842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cee8e5a0e4237e74a9ffce717b196107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: d8671c8fc15eefd43b945c0a8e81cd70, type: 2}
+  webClientID: 279219069772-jcfj9b3aqjhu3g0jm3qhk34n164hq8ed.apps.googleusercontent.com
+  OnLoginSuccess:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLoginFailed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1106199366883053776
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -666,13 +718,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 197844375429433690, guid: e5c9221758596544f985a10fd615c25f, type: 3}
+      propertyPath: m_Name
+      value: TitleText
+      objectReference: {fileID: 0}
+    - target: {fileID: 232395809814859489, guid: e5c9221758596544f985a10fd615c25f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -26.999756
+      objectReference: {fileID: 0}
+    - target: {fileID: 593010454292840612, guid: e5c9221758596544f985a10fd615c25f, type: 3}
+      propertyPath: m_Name
+      value: LoginText
+      objectReference: {fileID: 0}
     - target: {fileID: 1909510133472031337, guid: e5c9221758596544f985a10fd615c25f, type: 3}
       propertyPath: m_Name
       value: AuthenticationUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 1909510133472031337, guid: e5c9221758596544f985a10fd615c25f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3390374609963276191, guid: e5c9221758596544f985a10fd615c25f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -713,6 +773,22 @@ PrefabInstance:
     - target: {fileID: 3390374609963276191, guid: e5c9221758596544f985a10fd615c25f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650435086307551126, guid: e5c9221758596544f985a10fd615c25f, type: 3}
+      propertyPath: m_Name
+      value: ErrorText
+      objectReference: {fileID: 0}
+    - target: {fileID: 5751599547231727821, guid: e5c9221758596544f985a10fd615c25f, type: 3}
+      propertyPath: m_Name
+      value: LoadingText
+      objectReference: {fileID: 0}
+    - target: {fileID: 5942971693734236977, guid: e5c9221758596544f985a10fd615c25f, type: 3}
+      propertyPath: m_Name
+      value: LoginButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 6923002571031579606, guid: e5c9221758596544f985a10fd615c25f, type: 3}
+      propertyPath: m_Name
+      value: LoginToContinue
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -909,3 +985,4 @@ SceneRoots:
   - {fileID: 7371207118099519810}
   - {fileID: 2736216805925257286}
   - {fileID: 923268208}
+  - {fileID: 1477024843}
