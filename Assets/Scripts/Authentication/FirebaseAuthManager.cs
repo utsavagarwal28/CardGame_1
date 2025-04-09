@@ -1,7 +1,7 @@
 using UnityEngine;
-using Firebase;
-using Firebase.Auth;
-using Google;
+//using Firebase;
+//using Firebase.Auth;
+//using Google;
 using System.Threading.Tasks;
 using UnityEngine.Events;
 
@@ -20,7 +20,7 @@ namespace Game.Authentication
         public UnityEvent OnLoginSuccess;
         public UnityEvent<string> OnLoginFailed;
 
-        private FirebaseAuth firebaseAuth;
+        //private FirebaseAuth firebaseAuth;
         //private GoogleSignInConfiguration googleConfig;
     }
 }

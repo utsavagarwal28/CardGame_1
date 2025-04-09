@@ -734,6 +734,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AuthenticationUI
       objectReference: {fileID: 0}
+    - target: {fileID: 1909510133472031337, guid: e5c9221758596544f985a10fd615c25f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3390374609963276191, guid: e5c9221758596544f985a10fd615c25f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1085.0785
