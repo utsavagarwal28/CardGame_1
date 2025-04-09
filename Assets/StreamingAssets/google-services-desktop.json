@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "279219069772",
+    "project_id": "utsavagarwal28-cardgame1",
+    "storage_bucket": "utsavagarwal28-cardgame1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:279219069772:android:6f3f4cdd93e0269b11e5e9",
+        "android_client_info": {
+          "package_name": "com.utsavagarwal2002.cardGame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "279219069772-gbs96b25n8o9sl6u32tsc0aukt4hd1qv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.utsavagarwal2002.cardGame",
+            "certificate_hash": "181e31ca044fd7974a3f3a8e3cfddd92a94769a0"
+          }
+        },
+        {
+          "client_id": "279219069772-jcfj9b3aqjhu3g0jm3qhk34n164hq8ed.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkayD5LbfrKXVmu_luj2us6O3PmIpZinQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "279219069772-jcfj9b3aqjhu3g0jm3qhk34n164hq8ed.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
