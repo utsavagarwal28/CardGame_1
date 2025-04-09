@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7245926133852257215}
   - component: {fileID: 6147937427736998572}
   m_Layer: 0
-  m_Name: Player1
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 5247970662376297181}
   - component: {fileID: 4885855443196695606}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: LoginText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -408,7 +408,7 @@ GameObject:
   - component: {fileID: 8976408502820188330}
   - component: {fileID: 2821633692992745430}
   m_Layer: 0
-  m_Name: Text (TMP) (2)
+  m_Name: ErrorText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -647,7 +647,7 @@ GameObject:
   - component: {fileID: 6951376832284445116}
   - component: {fileID: 6302077006956772702}
   m_Layer: 0
-  m_Name: Text (TMP) (1)
+  m_Name: LoadingText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -784,7 +784,7 @@ GameObject:
   - component: {fileID: 3759715952545784757}
   - component: {fileID: 5750736444398741521}
   m_Layer: 0
-  m_Name: EditProfileButton
+  m_Name: LoginButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
