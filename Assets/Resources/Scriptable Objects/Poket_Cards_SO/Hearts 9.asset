@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e04c001317b842d4bab81be717afb8c5, type: 3}
+  m_Name: Hearts 9
+  m_EditorClassIdentifier: 
+  BackArt: {fileID: 21300000, guid: 4377f0bf24c157b4a98a78bf4678284a, type: 3}
+  Suit: 2
+  Rank: 9
+  FrontArt: {fileID: 21300000, guid: 70cb4ce51f0c8514886383b0a3f4eece, type: 3}
+  isTrump: 0
