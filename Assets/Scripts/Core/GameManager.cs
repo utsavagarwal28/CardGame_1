@@ -1,16 +1,25 @@
 using UnityEngine;
+using System.Collections.Generic;
 
-public class GameManager : MonoBehaviour
+namespace Game.Core
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class GameManager : MonoBehaviour
     {
-        
-    }
+        // Setup Singleton Class
+        public static GameManager Instance;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public List<SessionPlayerData> sessionPlayers;
+
+        public void Awake()
+        {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 }
