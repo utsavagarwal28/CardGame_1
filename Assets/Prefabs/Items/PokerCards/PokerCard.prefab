@@ -108,7 +108,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 7fa84d23d253cfe4d8faf8872d9cce21, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -195,7 +195,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 52e16ce8db7951b4bbf60e4c4f14bfec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 6462243022253552647}
   - component: {fileID: 6772830367586499340}
   - component: {fileID: 5665537474791209049}
+  - component: {fileID: 7222372855038266115}
   m_Layer: 0
   m_Name: PokerCard
   m_TagString: Untagged
@@ -235,8 +236,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.12, y: 0.11, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8760211600781583232}
   m_Father: {fileID: 0}
@@ -299,8 +300,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 568cf2d6ec1159f4c8bc68563b48e116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Image: {fileID: 6462243021699527057}
-  BackImage: {fileID: 6462243021217859703}
+  frontImage: {fileID: 6462243021699527057}
+  backImage: {fileID: 6462243021217859703}
+  SortingOrderInLayer: 10
+--- !u!114 &7222372855038266115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6462243022253552644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1d405f19de228846b939f0222161e4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  front: {fileID: 6462243022907097786}
+  back: {fileID: 6462243022722680614}
 --- !u!1 &6462243022722680614
 GameObject:
   m_ObjectHideFlags: 0

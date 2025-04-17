@@ -10,9 +10,9 @@ namespace Game.Core
         [Header("Player Slot References")]
         public List<PlayerSlotUI> playerSlots = new List<PlayerSlotUI>();
 
-        private int localPlayerNumber;
+        public int localPlayerNumber;
 
-        private void Start()
+        private void Awake()
         {
             ////////////////////////// Temporary /////////////////////
             localPlayerNumber = PlayerTagReader.LocalPlayerNumber;
@@ -21,9 +21,14 @@ namespace Game.Core
 
         }
 
+
+
         private void SetupPlayerSlots()
         {
             List<SessionPlayerData> originalList = GameManager.Instance.sessionPlayers;
+
+            foreach (SessionPlayerData sessionPlayer in originalList)
+                Debug.Log(sessionPlayer.DisplayName);
 
             if (originalList == null || originalList.Count != 4)
             {
