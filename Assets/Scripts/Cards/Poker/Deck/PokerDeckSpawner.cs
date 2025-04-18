@@ -26,10 +26,10 @@ namespace Game.Cards.Poker.Deck
 
 
 
-        void Start()
+        void Awake()
         {
-            //localPlayerNumber = PlayerTagReader.LocalPlayerNumber;
-            if (newPokerDeck.Count == 0)
+            localPlayerNumber = PlayerTagReader.LocalPlayerNumber;
+            if (newPokerDeck.Count == 0 && localPlayerNumber == 1)
                 SpawnDeck();
         }
 
