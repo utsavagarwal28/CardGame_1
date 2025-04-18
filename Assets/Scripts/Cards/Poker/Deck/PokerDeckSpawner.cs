@@ -48,7 +48,7 @@ namespace Game.Cards.Poker.Deck
                 // Applying the particular CardDefinition data to the card spawnned.
                 cardObj.GetComponent<PokerCardSetup>().Apply(cardDefinition[i]);
 
-
+                cardObj.GetComponent<PokerCardFacing>().SetCardFaceDown(cardDefinition[i]);
 
                 // Hiding the Card untill it's required
                 //cardObj.SetActive(false);

@@ -9,6 +9,6 @@ namespace Game.Cards
         [Tooltip("Back art for the card")]
         public Sprite BackArt;
 
-        public bool CardFacingUp = false;
+        public bool CardFacingUp = true;
     }
 }

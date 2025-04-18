@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Club 2
   m_EditorClassIdentifier: 
   BackArt: {fileID: 21300000, guid: 4377f0bf24c157b4a98a78bf4678284a, type: 3}
+  CardFacingUp: 1
   Suit: 3
   Rank: 2
   FrontArt: {fileID: 21300000, guid: 06ca27a1517b1fb489906b9580c7253c, type: 3}
