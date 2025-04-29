@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Diamond 7
   m_EditorClassIdentifier: 
   BackArt: {fileID: 21300000, guid: 4377f0bf24c157b4a98a78bf4678284a, type: 3}
+  CardFacingUp: 1
   Suit: 4
   Rank: 7
   FrontArt: {fileID: 21300000, guid: 9141e69b58985aa42883422a1707fd90, type: 3}

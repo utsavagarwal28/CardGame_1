@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Spade 3
   m_EditorClassIdentifier: 
   BackArt: {fileID: 21300000, guid: 4377f0bf24c157b4a98a78bf4678284a, type: 3}
+  CardFacingUp: 1
   Suit: 1
   Rank: 3
   FrontArt: {fileID: 21300000, guid: 5b78d5e4193dcc1439635521a982144b, type: 3}
-  isTrump: 0
+  isTrump: 1

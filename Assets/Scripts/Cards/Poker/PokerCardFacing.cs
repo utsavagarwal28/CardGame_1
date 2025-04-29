@@ -33,8 +33,8 @@ namespace Game.Cards.Poker
             if (data is PokerCardDefinition pokerCard)
             {
                 pokerCard.CardFacingUp = false;
-                front.SetActive(true);
-                back.SetActive(false);
+                front.SetActive(false);
+                back.SetActive(true);
             }
         }
     }
