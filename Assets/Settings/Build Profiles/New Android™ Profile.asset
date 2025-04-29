@@ -20,10 +20,12 @@ MonoBehaviour:
     rid: 5008822097596121091
   m_OverrideGlobalSceneList: 1
   m_Scenes:
-  - m_enabled: 1
+  - m_enabled: 0
     m_path: Assets/Scenes/MainMenu.unity
-  - m_enabled: 1
+  - m_enabled: 0
     m_path: Assets/NGO_Minimal_Setup/NGO_Setup.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/Lobby.unity
   - m_enabled: 1
     m_path: Assets/Scenes/GameScene.unity
   m_ScriptingDefines: []
