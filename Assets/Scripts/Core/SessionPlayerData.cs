@@ -8,6 +8,6 @@ namespace Game.Core
         public string UID;
         public string DisplayName;
         public bool IsHost;
-        public int PlayerNumber;
+        public int LobbyPlayerNumber;
     }    
 }
