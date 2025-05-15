@@ -7,9 +7,9 @@ namespace Game.Core.Players
     {
         public TextMeshPro nameText;
 
-        public void AssignPlayer(SessionPlayerData data)
-        {
-            nameText.text = data.DisplayName;
-        }
+        //public void AssignPlayer(SessionPlayerData data)
+        //{
+        //    nameText.text = data.DisplayName;
+        //}
     }
 }

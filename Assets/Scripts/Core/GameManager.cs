@@ -4,6 +4,7 @@ using Unity.Netcode;
 using Game.Lobby;
 using System.Threading.Tasks;
 using Unity.Services.Lobbies.Models;
+using LobbyClass = Unity.Services.Lobbies.Models.Lobby;
 
 namespace Game.Core
 {
@@ -14,8 +15,7 @@ namespace Game.Core
 
         //private string playerTag;
 
-        private static List<SessionPlayerData> sessionPlayerDataList = new List<SessionPlayerData>();
-        public static List<SessionPlayerData> SessionPlayerDataList { get => sessionPlayerDataList; private set => sessionPlayerDataList = value; }
+        public NetworkList<SessionPlayerData> SessionPlayerDataList;
 
         public void Awake()
         {
@@ -27,7 +27,50 @@ namespace Game.Core
 
             Instance = this;
             DontDestroyOnLoad(gameObject);
-        }    
+
+            SessionPlayerDataList = new NetworkList<SessionPlayerData>();
+        }
+
+        private void Start()
+        {
+            if (IsClient)
+            {
+                SessionPlayerDataList.OnListChanged += OnSessionPlayerDataListChanged;
+            }
+        }
+
+        public void PopulateSessionPlayerDataList()
+        {
+            if (!IsServer) return;
+
+            SessionPlayerDataList.Clear();
+
+            int i = 1;
+            LobbyClass currentLobby = LobbyManager.Instance.CurrentLobby;
+
+            foreach (Player player in currentLobby.Players)
+            {
+                player.Data.TryGetValue("DisplayName", out PlayerDataObject displayNameData);
+
+                var data = new SessionPlayerData()
+                {
+                    UID = player.Id,
+                    DisplayName = displayNameData?.Value ?? player.Id,
+                    IsHost = player.Id == currentLobby.HostId,
+                    LobbyPlayerNumber = i
+                };
+
+                SessionPlayerDataList.Add(data);
+                i++;
+            }
+
+            Debug.Log("SessionPlayerDataList populated with " + SessionPlayerDataList.Count + " players.");
+        }
+
+        private void OnSessionPlayerDataListChanged(NetworkListEvent<SessionPlayerData> changeEvent)
+        {
+            Debug.Log("SessionPlayerDataList: " + changeEvent.Type);
+        }
 
     }
 }

@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using Game.Cards.Poker;
 using Game.Core;
-using Game.Temporary;
 //using Game.Helpers;
 
 namespace Game.Cards.Poker.Deck
@@ -28,8 +27,8 @@ namespace Game.Cards.Poker.Deck
 
         void Awake()
         {
-            localPlayerNumber = PlayerTagReader.LocalPlayerNumber;
-            if (newPokerDeck.Count == 0)
+            //localPlayerNumber = PlayerTagReader.LocalPlayerNumber;
+            //if (newPokerDeck.Count == 0)
                 SpawnDeck();
         }
 

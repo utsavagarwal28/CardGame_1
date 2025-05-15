@@ -2,19 +2,11 @@ using UnityEngine;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using LobbyClass = Unity.Services.Lobbies.Models.Lobby;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Game.Lobby.LobbyCanvas;
 using Game.Relay;
 using Game.Authentication;
 using System;
-using Unity.Services.Authentication;
-using System.Linq;
-using Game.Temporary;
-using Newtonsoft.Json.Bson;
-using System.Diagnostics.Tracing;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Game.Core;
 using Unity.Netcode;
 
@@ -220,6 +212,8 @@ namespace Game.Lobby
             NetworkManager.Singleton.SceneManager.LoadScene("GameScene", UnityEngine.SceneManagement.LoadSceneMode.Additive);
 
             DeactivateGameObjects();
+
+            GameManager.Instance.PopulateSessionPlayerDataList();
         }
 
         private async Task JoinGameAsync(string relayJoinCode)
