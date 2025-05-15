@@ -15,7 +15,7 @@ namespace Game.Lobby.LobbyCanvas
         [SerializeField] private Transform content;
         [SerializeField] private GameObject playerListItemPrefab;
 
-        public Dictionary<int, Player> playerTagList { get; private set; }
+        //public Dictionary<int, Player> playerTagList { get; private set; }
 
         private async void Awake()
         {
@@ -41,8 +41,7 @@ namespace Game.Lobby.LobbyCanvas
 
         private void OnDestroy()
         {
-            if (LobbyManager.Instance == null) return;
-
+            CLearPlayerList();
             LobbyManager.Instance.OnLobbyPoll -= RefreshPlayerListAsync;
             LobbyManager.Instance.OnLobbyLeft -= CLearPlayerList;
         }
@@ -53,33 +52,33 @@ namespace Game.Lobby.LobbyCanvas
                 Destroy(child.gameObject);
         }
 
-        public async void RefreshPlayerListAsync()
+        public  void RefreshPlayerListAsync()
         {
             foreach (Transform child in content)
                 Destroy(child.gameObject);
 
-            if (playerTagList != null)
-            {
-                playerTagList.Clear();
-            }
-            playerTagList = new Dictionary<int, Player>();
+            //if (playerTagList != null)
+            //{
+            //    playerTagList.Clear();
+            //}
+            //playerTagList = new Dictionary<int, Player>();
 
             if (LobbyManager.Instance.CurrentLobby == null) return;
 
-            int playerTagValue = 1;
+            //int playerTagValue = 1;
             bool hostControl = LobbyManager.Instance.IsHost();
 
             foreach (Player player in LobbyManager.Instance.CurrentLobby.Players)
             {
                 GameObject item = Instantiate(playerListItemPrefab, content);
                 item.SetActive(true);
-                item.GetComponent<SessionPlayerListItem>().SetPlayer(player, playerTagValue, hostControl);
+                item.GetComponent<SessionPlayerListItem>().SetPlayer(player, hostControl);
                 //player.Data.TryGetValue("UID", out var playerUID);
-                playerTagList.Add(playerTagValue, player);
-                playerTagValue++;
+                //playerTagList.Add(playerTagValue, player);
+                //playerTagValue++;
             }
 
-            await LobbyManager.Instance.UpdatePlayerTagsAsync(playerTagList, LobbyManager.Instance.CurrentLobby.Id);
+            //await LobbyManager.Instance.UpdatePlayerTagsAsync(playerTagList, LobbyManager.Instance.CurrentLobby.Id);
         }
     }
 }

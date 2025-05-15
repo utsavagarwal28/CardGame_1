@@ -33,10 +33,20 @@ namespace Game.Lobby.LobbyCanvas
             LobbyManager.Instance.OnLobbyLeft -= StartGameButtonDeactivate;
         }
 
+        private void OnDisable()
+        {
+            if (LobbyManager.Instance == null) return;
+
+            LobbyManager.Instance.OnLobbyPoll -= StartGameButtonActivate;
+            LobbyManager.Instance.OnLobbyLeft -= StartGameButtonDeactivate;
+        }
+
         private void StartGameButtonActivate()
         {
-            var lobby = LobbyManager.Instance.CurrentLobby;
+            if (startGameButton == null || startGameButton.gameObject == null)
+                return;
 
+            var lobby = LobbyManager.Instance.CurrentLobby;
             bool isHost = LobbyManager.Instance.IsHost();
             bool full = lobby.Players != null && lobby.Players.Count == 4;
 
@@ -44,7 +54,8 @@ namespace Game.Lobby.LobbyCanvas
         }
         private void StartGameButtonDeactivate()
         {
-            startGameButton.gameObject.SetActive(false);
+            if (startGameButton != null && startGameButton.gameObject != null)
+                startGameButton.gameObject.SetActive(false);
         }
 
         private void Start()
@@ -52,6 +63,7 @@ namespace Game.Lobby.LobbyCanvas
             startGameButton.onClick.AddListener(() =>
             {
                 LobbyManager.Instance.StartGame();
+                startGameButton.gameObject.SetActive(false);
             });
             startGameButton.gameObject.SetActive(false);
         }

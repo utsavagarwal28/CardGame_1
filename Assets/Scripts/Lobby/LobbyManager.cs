@@ -15,6 +15,8 @@ using Game.Temporary;
 using Newtonsoft.Json.Bson;
 using System.Diagnostics.Tracing;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Game.Core;
+using Unity.Netcode;
 
 
 namespace Game.Lobby
@@ -25,16 +27,13 @@ namespace Game.Lobby
 
         public LobbyClass CurrentLobby { get; private set; }
 
-        //[SerializeField] private float heartBeatTimer = 15f;
-        //[SerializeField] private float lobbyPollTimer = 1f;
         public Action OnLobbyPoll;
         public Action OnLobbyLeft;
-        //public bool continuePolling;
 
-        public string currentPlayerId;
+        [NonSerialized] public string currentPlayerId;
 
-        public string PlayerTag;
-
+        [SerializeField] private GameObject GO_Setup;
+        [SerializeField] private GameObject GO_LobbyCanvas;
 
         async void Awake()
         {
@@ -72,17 +71,22 @@ namespace Game.Lobby
             {
                 try
                 {
-                    CurrentLobby.Data.TryGetValue("StartGame", out DataObject startGame);
-                    if (startGame.Value == "true") return;
-
                     LobbyClass newLobby = await LobbyService.Instance.GetLobbyAsync(CurrentLobby.Id);
                     CurrentLobby = newLobby;
 
-                    await JoinGame();
-
-                   
-
                     OnLobbyPoll?.Invoke();
+
+                    // Check if RelayJoinCode is present and not already connected
+                    if (!IsHost() && CurrentLobby.Data.TryGetValue("RelayJoinCode", out var relayJoinCodeObj))
+                    {
+                        if (!string.IsNullOrEmpty(relayJoinCodeObj.Value))
+                        {
+                            // Start client and stop polling
+                            await JoinGameAsync(relayJoinCodeObj.Value);
+                            break;
+                        }
+                    }
+
                 }
                 catch (LobbyServiceException e)
                 {
@@ -96,11 +100,6 @@ namespace Game.Lobby
                         break; // Exit the polling loop
                     }
                 }
-                catch (Exception e)
-                {
-                    Debug.LogError($"Unexpected error in lobby polling: {e.Message}");
-                    break;
-                }
 
                 await Task.Delay(4000);
             }
@@ -110,48 +109,7 @@ namespace Game.Lobby
         }
 
 
-        public async Task UpdatePlayerTagsAsync(Dictionary<int, Player> playerTagList, string lobbyId)
-        {
-            UpdatePlayerOptions lobbyOptions = new UpdatePlayerOptions();
 
-            foreach (int key in playerTagList.Keys)
-            {
-
-                switch (key)
-                {
-                    case 1:
-                        PlayerTag = "Player1";
-                        break;
-
-                    case 2:
-                        PlayerTag = "Player2";
-                        break;
-
-                    case 3:
-                        PlayerTag = "Player3";
-                        break;
-
-                    case 4:
-                        PlayerTag = "Player4";
-                        break;
-                }
-
-                playerTagList.TryGetValue(key, out Player player);
-
-
-                if (player.Id == currentPlayerId)
-                {
-
-                    lobbyOptions.Data = new Dictionary<string, PlayerDataObject>()
-                    {
-                        {"PlayerTag", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, value: PlayerTag)},
-                        {"IsHost", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, IsHost().ToString())}
-                    };
-                    break;
-                }
-            }
-            var lobby = await LobbyService.Instance.UpdatePlayerAsync(this.CurrentLobby.Id, currentPlayerId, lobbyOptions);
-        }
 
         public async Task CreateLobbyWithHeartbeatAsync(string lobbyName)
         {
@@ -170,21 +128,14 @@ namespace Game.Lobby
                 id: AuthenticationManager.Instance.GetPlayerID(),
                 data: new Dictionary<string, PlayerDataObject>()
                 {
-                    {
-                        "UID", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, value: currentPlayerId)
-                    },
-                    {
-                        "DisplayName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, value: currentPlayerId)
-                    },
-
+                    {"DisplayName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, value: currentPlayerId) }
                 });
 
             lobbyOptions.Data = new Dictionary<string, DataObject>()
             {
-                {"StartGame", new DataObject(DataObject.VisibilityOptions.Public, "false") }
+                {"RelayJoinCode",  new DataObject(DataObject.VisibilityOptions.Public, null)},
             };
 
-            // Create the lobby with current options and set it as current lobby
             CurrentLobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, lobbyOptions);
             Debug.Log(CurrentLobby.LobbyCode + " created");
 
@@ -205,14 +156,10 @@ namespace Game.Lobby
 
             JoinLobbyByCodeOptions lobbyOptions = new JoinLobbyByCodeOptions();
 
-
             lobbyOptions.Player = new Player(
                 id: AuthenticationManager.Instance.GetPlayerID(),
                 data: new Dictionary<string, PlayerDataObject>()
                 {
-                    {
-                        "UID", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, value: currentPlayerId)
-                    },
                     {
                         "DisplayName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, value: currentPlayerId)
                     },
@@ -255,39 +202,34 @@ namespace Game.Lobby
 
         public async void StartGame()
         {
-            if (IsHost())
+            if (!IsHost()) return;
+
+            // Initiate Relay Server
+            string RelayJoinCode = await RelayManager.Instance.StartHostWithRelayAsync();
+
+            UpdateLobbyOptions lobbyOptions = new UpdateLobbyOptions();
+
+            lobbyOptions.Data = new Dictionary<string, DataObject>()
             {
-                // Initiate Relay Server
-                string RelayJoinCode = await RelayManager.Instance.StartHostWithRelayAsync();
+                {"RelayJoinCode",  new DataObject(DataObject.VisibilityOptions.Public, RelayJoinCode)},
+            };
+            await LobbyService.Instance.UpdateLobbyAsync(CurrentLobby.Id, lobbyOptions);
 
-                UpdateLobbyOptions lobbyOptions = new UpdateLobbyOptions();
 
-                lobbyOptions.Data = new Dictionary<string, DataObject>()
-                {
-                    {"RelayJoinCode",  new DataObject(DataObject.VisibilityOptions.Public, RelayJoinCode)},
-                    {"StartGame", new DataObject(DataObject.VisibilityOptions.Public, "true") }
-                };
-                await LobbyService.Instance.UpdateLobbyAsync(CurrentLobby.Id, lobbyOptions);
-            }
-            //Debug.Log("Starting Game...");
-            //Unity.Netcode.NetworkManager.Singleton.SceneManager.LoadScene("GameScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
+            Debug.Log("Starting Game...");
+            NetworkManager.Singleton.SceneManager.LoadScene("GameScene", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+
+            DeactivateGameObjects();
         }
 
-        public async Task JoinGame()
+        private async Task JoinGameAsync(string relayJoinCode)
         {
-            if (IsHost()) return;
 
-            CurrentLobby.Data.TryGetValue("StartGame", out DataObject startGame);
-            if (startGame.Value == "false") return;
+            bool gameJoined = await RelayManager.Instance.StartClientWithRelayAsync(relayJoinCode);
 
+            Debug.Log($"{currentPlayerId} join {relayJoinCode} {(gameJoined ? "successfully" : "failed")}");
 
-            CurrentLobby.Data.TryGetValue("RelayJoinCode", out DataObject relayJoinCode);
-
-            bool gameJoined = await RelayManager.Instance.StartClientWithRelayAsync(relayJoinCode.Value);
-
-            Debug.Log($"{currentPlayerId} join {relayJoinCode.Value} {(gameJoined ? "successfully" : "failed")}");
-
-            return;
+            DeactivateGameObjects();
         }
 
         public async Task LeaveLobby()
@@ -306,6 +248,13 @@ namespace Game.Lobby
                     Debug.LogError($"Error leaving the lobby: {e.Message}");
                 }
             }
+            OnLobbyLeft?.Invoke();
+        }
+
+        private void DeactivateGameObjects()
+        {
+            GO_LobbyCanvas.SetActive(false);
+            GO_Setup.SetActive(false);
         }
     }
 }

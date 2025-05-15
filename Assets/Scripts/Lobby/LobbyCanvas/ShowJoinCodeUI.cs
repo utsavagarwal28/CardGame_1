@@ -8,8 +8,8 @@ namespace Game.Lobby.LobbyCanvas
 {
     public class ShowJoinCodeUI : MonoBehaviour
     {
-        [SerializeField] private TMP_Text joinCodeText;
-        [SerializeField] private Button copyButton;
+        public TMP_Text joinCodeText;
+        public Button copyButton;
 
         private async void Awake()
         {

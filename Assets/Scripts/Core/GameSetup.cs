@@ -25,7 +25,7 @@ namespace Game.Core
 
         private void SetupPlayerSlots()
         {
-            List<SessionPlayerData> originalList = GameManager.Instance.sessionPlayers;
+            List<SessionPlayerData> originalList = GameManager.SessionPlayerDataList;
 
             foreach (SessionPlayerData sessionPlayer in originalList)
                 Debug.Log(sessionPlayer.DisplayName);

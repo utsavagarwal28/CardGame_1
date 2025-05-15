@@ -11,7 +11,7 @@ namespace Game.Lobby.LobbyCanvas
     {
         [SerializeField] private Image panel;
         [SerializeField] private TMP_Text playerNameText;
-        [SerializeField] private TMP_Text playerTagNumber;
+        //[SerializeField] private TMP_Text playerTagNumber;
         [SerializeField] Button kickButton;
 
         private Player player;
@@ -30,7 +30,7 @@ namespace Game.Lobby.LobbyCanvas
                 await Task.Yield();
         }
 
-        public void SetPlayer(Player p, int playerTagValue, bool hostControl)
+        public void SetPlayer(Player p, bool hostControl)
         {
             player = p;
 
@@ -39,7 +39,7 @@ namespace Game.Lobby.LobbyCanvas
                 : p.Id;
 
             playerNameText.text = displayName;
-            playerTagNumber.text = playerTagValue.ToString();
+            //playerTagNumber.text = playerTagValue.ToString();
 
             bool isLocalP = p.Id == AuthenticationManager.Instance.GetPlayerID();
             bool isHostP = p.Id == LobbyManager.Instance.CurrentLobby.HostId;
