@@ -502,6 +502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GO_Setup: {fileID: 417649247}
   GO_LobbyCanvas: {fileID: 1801581085}
+  GO_LobbyManager: {fileID: 1239973696}
 --- !u!4 &1239973698
 Transform:
   m_ObjectHideFlags: 0

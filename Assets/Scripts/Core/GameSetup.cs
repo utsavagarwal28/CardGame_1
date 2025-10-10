@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using Game.Core.Players;
 using System;
-using Unity.Netcode;
 
 namespace Game.Core
 {
@@ -11,12 +10,13 @@ namespace Game.Core
         [Header("Player Slot References")]
         public List<PlayerSlotUI> playerSlots = new List<PlayerSlotUI>();
 
+        public Action OnGameSetup;
 
         public int localPlayerNumber;
 
         private void Awake()
         {
-            GameManager.Instance.SessionPlayerDataList.OnListChanged += SetupLocalPlayerSlots;
+
         }
 
         public void OnEnable()
@@ -26,10 +26,7 @@ namespace Game.Core
             //OnGameSetup?.Invoke();
         }
 
-        private void SetupLocalPlayerSlots(NetworkListEvent<SessionPlayerData> changeEvent)
-        {
 
-        }
 
         //private void SetupPlayerSlots()
         //{
